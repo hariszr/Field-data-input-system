@@ -18,5 +18,9 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this@HomeActivity, Musim1Activity::class.java))
         }
 
+        binding!!.btnDataKelompokTani.setOnClickListener {
+            startActivity(Intent(this@HomeActivity, DataKelompokTaniActivity::class.java))
+        }
+
     }
 }
