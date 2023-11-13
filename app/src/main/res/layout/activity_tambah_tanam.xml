@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_background"
+    tools:context=".TambahTanamActivity">
+
+    <LinearLayout
+        android:id="@+id/icon_rice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="15dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icon_rice"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_dataLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon_rice"
+        android:orientation="vertical"
+        android:paddingHorizontal="28dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Luas Tambah Tanam (hektar)"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/luas_TambahTanamLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint=""
+                app:boxStrokeColor="@color/dark_blue"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_blue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/luas_TambahTanamET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:inputType="numberDecimal|numberSigned" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Varietas Benih"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/varietas_Layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint=""
+                app:boxStrokeColor="@color/dark_blue"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_blue"
+                tools:ignore="RtlHardcoded">
+
+                <AutoCompleteTextView
+                    android:id="@+id/varietas_DropDown"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="-10dp"
+                    android:inputType="textCapWords"
+                    tools:ignore="RtlHardcoded" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumlah Benih (kg)"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/jumlah_BenihLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint=""
+                app:boxStrokeColor="@color/dark_blue"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_blue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/jumlah_BenihET"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:inputType="numberDecimal|numberSigned" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asal Benih"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/asal_BenihLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint=""
+                app:boxStrokeColor="@color/dark_blue"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_blue">
+
+                <AutoCompleteTextView
+                    android:id="@+id/asal_BenihDropDown"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="-30dp"
+                    android:inputType="textCapWords"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Tanam"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tanggalTanamLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:hint=""
+                app:boxStrokeColor="@color/dark_blue"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_blue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tanggalTanamET"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_date"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:cursorVisible="false"
+                    android:focusableInTouchMode="false"
+                    android:drawablePadding="12dp"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:paddingEnd="10dp"
+            tools:ignore="RtlSymmetry">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="false"
+                android:gravity="center"
+                android:text="Dokumentasi"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:id="@+id/add_PhotoIV"
+                android:layout_width="200dp"
+                android:layout_height="140dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_add_photo"
+                tools:ignore="MissingConstraints"
+                android:contentDescription="TODO" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/input_dataLL">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_tambahTanam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/btn_round3"
+            android:text="TAMBAH TANAM"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:padding="15dp">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/icon_kementan"
+            android:layout_gravity="center_vertical"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DIREKTORAT SEREALIA"
+                android:textStyle="bold"
+                android:textSize="13sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DIREKTORAT JENDERAL TANAMAN PANGAN"
+                android:textStyle="bold"
+                android:textSize="13sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KEMENTRIAN PERTANIAN"
+                android:textStyle="bold"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_background"
+    tools:context=".Musim1Activity">
+
+    <LinearLayout
+        android:id="@+id/icon_rice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="15dp"
+        android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/icon_user"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/icon_rice"
+        android:orientation="vertical"
+        android:paddingHorizontal="28dp"
+        android:paddingBottom="10dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_tambahTanam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_round1"
+            android:text="TAMBAH TANAM"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:textStyle="normal"  />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_pemupukan1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_round1"
+            android:text="PEMUPUKAN KE-1"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:textStyle="normal"  />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_pemupukan2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_round1"
+            android:text="PEMUPUKAN KE-2"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:textStyle="normal"  />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_pengendalianOPT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_round1"
+            android:text="PENGENDALIAN OPT"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:textStyle="normal"  />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dinamikaBudidaya"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_round1"
+            android:text="DINAMIKA BUDIDAYA"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:textStyle="normal"  />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_panen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_round1"
+            android:text="PANEN"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:textStyle="normal"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:padding="28dp"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/icon_kementan"
+            android:layout_marginBottom="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DIREKTORAT SEREALIA"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DIREKTORAT JENDERAL TANAMAN PANGAN"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KEMENTRIAN PERTANIAN"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
