@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.sisteminformasi.databinding.ActivityHomeBinding
 import com.example.sisteminformasi.databinding.ActivityMusim1Binding
+import com.example.sisteminformasi.helper.DatabaseHelper
 
 class HomeActivity : AppCompatActivity() {
     private var binding : ActivityHomeBinding? = null
@@ -19,7 +20,19 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding!!.btnDataKelompokTani.setOnClickListener {
-            startActivity(Intent(this@HomeActivity, DataKelompokTaniActivity::class.java))
+//            startActivity(Intent(this@HomeActivity, DataKelompokTaniActivity::class.java))
+
+            val intent = Intent(this@HomeActivity, DataKelompokTaniActivity::class.java)
+            startActivity(intent)
+            // Mendapatkan objek Users dari database SQLite
+//            val dbHelper = DatabaseHelper(this)
+//            val user = dbHelper.getUser("nama_pengguna", "N") // Ganti dengan kondisi atau metode yang sesuai
+//
+//            // Memulai aktivitas dan mengirimkan objek Users melalui Intent
+//            val intent = Intent(this, DataKelompokTaniActivity::class.java).apply {
+//                putExtra("USER_DATA", user)
+//            }
+//            startActivity(intent)
         }
 
     }

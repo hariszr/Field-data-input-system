@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -64,4 +65,12 @@ dependencies {
 
     //Image Picker and Crop
     implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    //SQLITE
+    implementation "androidx.sqlite:sqlite-ktx:2.4.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.2"
+
+    implementation "androidx.room:room-runtime:2.6.0"
+    kapt "androidx.room:room-compiler:2.6.0"
 }

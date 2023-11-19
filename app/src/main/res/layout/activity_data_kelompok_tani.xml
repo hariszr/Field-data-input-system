@@ -13,8 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
-
+        android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,21 +29,21 @@
                 android:textStyle="bold"/>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/kelom_TaniLayout"
+                android:id="@+id/poktanLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
                 app:hintTextColor="@color/dark_blue">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/kelom_TaniET"
+                    android:id="@+id/poktanET"
                     android:layout_width="190dp"
                     android:layout_height="wrap_content"
                     android:drawablePadding="12dp"
@@ -75,7 +74,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -101,7 +100,45 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kabupaten"
+                android:text="Provinsi"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/provLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="0dp"
+                android:hint=""
+                app:boxStrokeColor="@color/dark_blue"
+                app:errorEnabled="true"
+                app:hintTextColor="@color/dark_blue">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/provET"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="12dp"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="15dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kabupaten/Kota"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -113,7 +150,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -151,7 +188,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -177,7 +214,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Desa"
+                android:text="Desa/Kelurahan"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
 
@@ -189,7 +226,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -227,7 +264,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -265,7 +302,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -303,7 +340,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -341,7 +378,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
@@ -379,7 +416,7 @@
                 android:layout_weight="1"
                 android:gravity="right"
                 android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="0dp"
                 android:hint=""
                 app:boxStrokeColor="@color/dark_blue"
                 app:errorEnabled="true"
