@@ -1,9 +1,11 @@
 package com.example.sisteminformasi.network
 
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 
 class ApiRetrofit {
@@ -17,11 +19,16 @@ class ApiRetrofit {
             .addInterceptor(interceptor)
             .build()
 
+        val gson = GsonBuilder()
+            .enableComplexMapKeySerialization()
+            .setLenient()
+            .create()
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.1.21:80/")
             .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
         return  retrofit.create(ApiClient::class.java)

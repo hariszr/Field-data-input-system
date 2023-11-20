@@ -17,5 +17,9 @@ class Musim1Activity : AppCompatActivity() {
         binding!!.btnTambahTanam.setOnClickListener {
             startActivity(Intent(this@Musim1Activity, TambahTanamActivity::class.java))
         }
+
+        binding!!.btnPemupukan1.setOnClickListener {
+            startActivity(Intent(this@Musim1Activity, PemupukanActivity::class.java))
+        }
     }
 }

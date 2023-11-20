@@ -20,6 +20,7 @@ class DataKelompokTaniActivity : AppCompatActivity() {
 
         // Terima ID dari Intent
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+
         val provinsi = sharedPreferences.getString("provinsi", (-1).toString())
         val kabkota = sharedPreferences.getString("kab/kota", (-1).toString())
         val kecamatan = sharedPreferences.getString("kecamatan", (-1).toString())

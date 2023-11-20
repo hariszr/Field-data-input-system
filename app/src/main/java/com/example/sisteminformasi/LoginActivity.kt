@@ -77,11 +77,15 @@ class LoginActivity : AppCompatActivity() {
             // Simpan userId di SharedPreferences
             val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
             val editor = sharedPreferences.edit()
+
             editor.putString("provinsi", user.prop)
             editor.putString("kab/kota", user.kab)
             editor.putString("kecamatan", user.kec)
             editor.putString("desa", user.desa)
             editor.putString("poktan", user.nama_poktan)
+
+//            editor.putString("kodewilayah", user.kodwil)
+//            editor.putString("createdby", user.id.toString())
             editor.apply()
 
             finish()

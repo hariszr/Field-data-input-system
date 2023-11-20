@@ -23,6 +23,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
+import android.content.Context
 import android.os.Build
 import android.provider.OpenableColumns
 import androidx.annotation.RequiresApi
@@ -126,7 +127,14 @@ class TambahTanamActivity : AppCompatActivity() {
         val varietas = binding!!.varietasDropDown.text.toString()
         val jumlahBenih = binding!!.jumlahBenihET.text.toString()
         val asalBenih = binding!!.asalBenihDropDown.text.toString()
-        val tanggalTanam = binding!!.tanggalTanamET.text.toString()
+        val tanggalInput = binding!!.tanggalTanamET.text.toString()
+
+        val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val kodwil = sharedPreferences.getString("kodewilayah", (-1).toString())
+        val createdby = sharedPreferences.getString("createdby", (-1).toString())
+
+        println("kodwil: $kodwil")
+        println("createdby: $createdby")
 
 //        val parceFileDescriptor = contentResolver.openFileDescriptor(selectedImg!!, "r", null)?: return
 //        val file = File(cacheDir, contentResolver.getFileName(selectedImg!!))
@@ -171,6 +179,7 @@ class TambahTanamActivity : AppCompatActivity() {
 
         // Pastikan bahwa imagePath tidak kosong sebelum membuat file
         if (selectedImg != null) {
+
             Log.e("selected IMG", "Selected Img: ${selectedImg!!.path}")
             val file = File(selectedImg!!.path.toString())
 
@@ -178,15 +187,17 @@ class TambahTanamActivity : AppCompatActivity() {
             val requestFile = RequestBody.create("image/*".toMediaType(), file)
             Log.e("file Name", "file name: ${file.name}")
             // Buat objek MultipartBody.Part dari file gambar
-            val dokumentasi = MultipartBody.Part.createFormData("dokumentasi", file.name, requestFile)
+            val images = MultipartBody.Part.createFormData("images", file.name, requestFile)
 
             api.create(
                 RequestBody.create("text/plain".toMediaTypeOrNull(), luasTambahTanam),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), varietas),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), jumlahBenih),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), asalBenih),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalTanam),
-                dokumentasi
+                RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalInput),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), kodwil.toString()),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), createdby.toString()),
+                images
 
             ).enqueue(object : Callback<SubmitModel> {
                 override fun onResponse(call: Call<SubmitModel>, response: Response<SubmitModel>) {
@@ -260,7 +271,7 @@ class TambahTanamActivity : AppCompatActivity() {
         }
     }
     private fun updateLabel(myCalendar: Calendar) {
-        val myFormat = "dd-MM-yyyy"
+        val myFormat = "yyyy-MM-dd"
         val simpleDateFormat = SimpleDateFormat(myFormat, Locale.UK)
         binding!!.tanggalTanamET.setText(simpleDateFormat.format(myCalendar.time))
     }

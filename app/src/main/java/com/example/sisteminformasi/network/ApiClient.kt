@@ -5,11 +5,7 @@ import com.example.sisteminformasi.model.ResponseLogin
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.*
 
 interface ApiClient {
 
@@ -20,14 +16,17 @@ interface ApiClient {
         @Field("post_password") password : String
     ): retrofit2.Call<ResponseLogin>
 
+
     @Multipart
-    @POST("login/create.php")
+    @POST("login/create2.php")
     fun create(
-        @Part("luas_tambah_tanam") luas_tambah_tanam: RequestBody,
-        @Part("varietas_benih") varietas: RequestBody,
+        @Part("luas_tambah") luas_tambah_tanam: RequestBody,
+        @Part("varietas_id") varietas: RequestBody,
         @Part("jumlah_benih") jumlah: RequestBody,
         @Part("asal_benih") asal: RequestBody,
-        @Part("tanggal_tanam") tanggal_tanam: RequestBody,
-        @Part dokumentasi: MultipartBody.Part
+        @Part("tanggal_input") tanggal: RequestBody,
+        @Part("kode_wilayah") kodwil: RequestBody,
+        @Part("created_by") createdby: RequestBody,
+        @Part img: MultipartBody.Part
     ) : Call<SubmitModel>
 }
