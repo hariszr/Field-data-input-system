@@ -13,7 +13,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.sisteminformasi.databinding.ActivityOptactivityBinding
+import com.example.sisteminformasi.databinding.ActivityDinamikaBinding
 import com.example.sisteminformasi.network.ApiRetrofit
 import com.github.dhaval2404.imagepicker.ImagePicker
 import okhttp3.MediaType.Companion.toMediaType
@@ -27,22 +27,24 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OPTActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityOptactivityBinding
+class DinamikaActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityDinamikaBinding
     private val api by lazy { ApiRetrofit().endpoint }
     private lateinit var builder : AlertDialog.Builder
 
     private var selectedImg : Uri? = null
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOptactivityBinding.inflate(layoutInflater)
+        binding = ActivityDinamikaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         builder = AlertDialog.Builder(this)
 
-        displayDropDownAsalObat()
         displayDate()
+        displayDropDownJenisKejadian()
+        displayDropDownPotensiPenguranganHasil()
 
         setupListener()
     }
@@ -62,22 +64,20 @@ class OPTActivity : AppCompatActivity() {
         }
 
         binding.kirimBTN.setOnClickListener {
-            if (binding.jenisHamaPenyakitET.text.toString().isNotEmpty()) {
-                if (binding.jenisHamaPenyakitET.text.toString().isNotEmpty()) {
-                    if (binding.namaObatET.text.toString().isNotEmpty()) {
-                        if (binding.asalObatDropDown.text.toString().isNotEmpty()) {
-                            if (binding.tanggalPenyemprotanET.text.toString().isNotEmpty()) {
-                                builder.setTitle("Kirim Data")
-                                    .setMessage("Apakah data yang dimasukkan sudah benar?")
-                                    .setCancelable(true)
-                                    .setNegativeButton("Batalkan") {dialogInterface, it ->
-                                        dialogInterface.cancel()
-                                    }
-                                    .setPositiveButton("Ya") {dialogInterface, it ->
-                                        createApi()
-                                    }
-                                    .show()
-                            }
+            if (binding.jenisKejadianDropDown.text.toString().isNotEmpty()) {
+                if (binding.luasCakupanET.text.toString().isNotEmpty()) {
+                    if (binding.potensiPenguranganDropDown.text.toString().isNotEmpty()) {
+                        if (binding.tanggalKejadianET.text.toString().isNotEmpty()) {
+                            builder.setTitle("Kirim Data")
+                                .setMessage("Apakah data yang dimasukkan sudah benar?")
+                                .setCancelable(true)
+                                .setNegativeButton("Batalkan") {dialogInterface, it ->
+                                    dialogInterface.cancel()
+                                }
+                                .setPositiveButton("Ya") {dialogInterface, it ->
+                                    createApi()
+                                }
+                                .show()
                         }
                     }
                 }
@@ -87,12 +87,11 @@ class OPTActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
-        val luasPenyemprotan = binding.luasPenyemprotanET.text.toString()
+        val jenisKejadian = binding.jenisKejadianDropDown.text.toString()
 //        val musimTanam = "1"
-        val jenisHamaPenyakit = binding.jenisHamaPenyakitET.text.toString()
-        val namaObat = binding.namaObatET.text.toString()
-        val asalObat = binding.asalObatDropDown.text.toString()
-        val tanggalPenyemprotan = binding.tanggalPenyemprotanET.text.toString()
+        val luasCakupan = binding.luasCakupanET.text.toString()
+        val potensiPengurangan = binding.potensiPenguranganDropDown.text.toString().replace("%", "").replace("-", "")
+        val tanggalKejadian = binding.tanggalKejadianET.text.toString()
 
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val kodwil = sharedPreferences.getString("gabKode", (-1).toString())
@@ -113,13 +112,12 @@ class OPTActivity : AppCompatActivity() {
             // Buat objek MultipartBody.Part dari file gambar
             val images = MultipartBody.Part.createFormData("images", file.name, requestFile)
 
-            api.create_OPT(
-                RequestBody.create("text/plain".toMediaTypeOrNull(), luasPenyemprotan),
+            api.create_dinamika(
                 RequestBody.create("text/plain".toMediaTypeOrNull(), kodwil.toString()),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), jenisHamaPenyakit),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), namaObat),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), asalObat),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalPenyemprotan),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), jenisKejadian),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), luasCakupan),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), potensiPengurangan),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalKejadian),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), createdby.toString()),
                 images
 
@@ -153,7 +151,7 @@ class OPTActivity : AppCompatActivity() {
             updateLabel(myCalendar)
         }
 
-        binding.tanggalPenyemprotanET.setOnClickListener {
+        binding.tanggalKejadianET.setOnClickListener {
             val dPicker = DatePickerDialog(this, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(
                 Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH))
             dPicker.datePicker.minDate = System.currentTimeMillis()
@@ -163,13 +161,19 @@ class OPTActivity : AppCompatActivity() {
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "yyyy-MM-dd"
         val simpleDateFormat = SimpleDateFormat(myFormat, Locale.UK)
-        binding.tanggalPenyemprotanET.setText(simpleDateFormat.format(myCalendar.time))
+        binding.tanggalKejadianET.setText(simpleDateFormat.format(myCalendar.time))
     }
 
-    private fun displayDropDownAsalObat() {
-        val itemsAsalObat = listOf("Mandiri", "Bantuan Pemerintah")
-        val adapterAsalObat = ArrayAdapter(this, R.layout.item_list_dropdown, itemsAsalObat)
-        binding.asalObatDropDown.setAdapter(adapterAsalObat)
+    private fun displayDropDownJenisKejadian() {
+        val itemsJenisKejadian = listOf("Banjir", "Gempa/Badai", "Serangan OPT", "Kekeringan", "Kelangkaan Pupuk", "Kelangkaan Obat-Obatan")
+        val adapterJenisKejadian = ArrayAdapter(this, R.layout.item_list_dropdown, itemsJenisKejadian)
+        binding.jenisKejadianDropDown.setAdapter(adapterJenisKejadian)
+    }
+
+    private fun displayDropDownPotensiPenguranganHasil() {
+        val itemsPotensi = listOf("0%-10%", "10%-20%", "20%-30%", "30%-40%", "40%-50%", "50%-60%", "60%-70%", "70%-80%", "80%-90%", "90%-100%")
+        val adapterPotensi = ArrayAdapter(this, R.layout.item_list_dropdown, itemsPotensi)
+        binding.potensiPenguranganDropDown.setAdapter(adapterPotensi)
     }
 
     @Deprecated("Deprecated in Java")
@@ -184,4 +188,5 @@ class OPTActivity : AppCompatActivity() {
             }
         }
     }
+
 }

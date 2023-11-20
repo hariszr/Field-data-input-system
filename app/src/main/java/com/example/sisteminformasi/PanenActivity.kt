@@ -10,10 +10,9 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.sisteminformasi.databinding.ActivityOptactivityBinding
+import com.example.sisteminformasi.databinding.ActivityPanenBinding
 import com.example.sisteminformasi.network.ApiRetrofit
 import com.github.dhaval2404.imagepicker.ImagePicker
 import okhttp3.MediaType.Companion.toMediaType
@@ -27,8 +26,8 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OPTActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityOptactivityBinding
+class PanenActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityPanenBinding
     private val api by lazy { ApiRetrofit().endpoint }
     private lateinit var builder : AlertDialog.Builder
 
@@ -36,12 +35,11 @@ class OPTActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOptactivityBinding.inflate(layoutInflater)
+        binding = ActivityPanenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         builder = AlertDialog.Builder(this)
 
-        displayDropDownAsalObat()
         displayDate()
 
         setupListener()
@@ -62,23 +60,19 @@ class OPTActivity : AppCompatActivity() {
         }
 
         binding.kirimBTN.setOnClickListener {
-            if (binding.jenisHamaPenyakitET.text.toString().isNotEmpty()) {
-                if (binding.jenisHamaPenyakitET.text.toString().isNotEmpty()) {
-                    if (binding.namaObatET.text.toString().isNotEmpty()) {
-                        if (binding.asalObatDropDown.text.toString().isNotEmpty()) {
-                            if (binding.tanggalPenyemprotanET.text.toString().isNotEmpty()) {
-                                builder.setTitle("Kirim Data")
-                                    .setMessage("Apakah data yang dimasukkan sudah benar?")
-                                    .setCancelable(true)
-                                    .setNegativeButton("Batalkan") {dialogInterface, it ->
-                                        dialogInterface.cancel()
-                                    }
-                                    .setPositiveButton("Ya") {dialogInterface, it ->
-                                        createApi()
-                                    }
-                                    .show()
+            if (binding.luasPanenET.text.toString().isNotEmpty()) {
+                if (binding.jumlahPanenET.text.toString().isNotEmpty()) {
+                    if (binding.tanggalPanenET.text.toString().isNotEmpty()) {
+                        builder.setTitle("Kirim Data")
+                            .setMessage("Apakah data yang dimasukkan sudah benar?")
+                            .setCancelable(true)
+                            .setNegativeButton("Batalkan") {dialogInterface, it ->
+                                dialogInterface.cancel()
                             }
-                        }
+                            .setPositiveButton("Ya") {dialogInterface, it ->
+                                createApi()
+                            }
+                            .show()
                     }
                 }
             }
@@ -87,12 +81,10 @@ class OPTActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
-        val luasPenyemprotan = binding.luasPenyemprotanET.text.toString()
+        val luasPanen = binding.luasPanenET.text.toString()
 //        val musimTanam = "1"
-        val jenisHamaPenyakit = binding.jenisHamaPenyakitET.text.toString()
-        val namaObat = binding.namaObatET.text.toString()
-        val asalObat = binding.asalObatDropDown.text.toString()
-        val tanggalPenyemprotan = binding.tanggalPenyemprotanET.text.toString()
+        val jumlahPanen = binding.jumlahPanenET.text.toString()
+        val tanggalPanen = binding.tanggalPanenET.text.toString()
 
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
         val kodwil = sharedPreferences.getString("gabKode", (-1).toString())
@@ -113,13 +105,11 @@ class OPTActivity : AppCompatActivity() {
             // Buat objek MultipartBody.Part dari file gambar
             val images = MultipartBody.Part.createFormData("images", file.name, requestFile)
 
-            api.create_OPT(
-                RequestBody.create("text/plain".toMediaTypeOrNull(), luasPenyemprotan),
+            api.create_panen(
                 RequestBody.create("text/plain".toMediaTypeOrNull(), kodwil.toString()),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), jenisHamaPenyakit),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), namaObat),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), asalObat),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalPenyemprotan),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), luasPanen),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), jumlahPanen),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalPanen),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), createdby.toString()),
                 images
 
@@ -153,7 +143,7 @@ class OPTActivity : AppCompatActivity() {
             updateLabel(myCalendar)
         }
 
-        binding.tanggalPenyemprotanET.setOnClickListener {
+        binding.tanggalPanenET.setOnClickListener {
             val dPicker = DatePickerDialog(this, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(
                 Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH))
             dPicker.datePicker.minDate = System.currentTimeMillis()
@@ -163,13 +153,7 @@ class OPTActivity : AppCompatActivity() {
     private fun updateLabel(myCalendar: Calendar) {
         val myFormat = "yyyy-MM-dd"
         val simpleDateFormat = SimpleDateFormat(myFormat, Locale.UK)
-        binding.tanggalPenyemprotanET.setText(simpleDateFormat.format(myCalendar.time))
-    }
-
-    private fun displayDropDownAsalObat() {
-        val itemsAsalObat = listOf("Mandiri", "Bantuan Pemerintah")
-        val adapterAsalObat = ArrayAdapter(this, R.layout.item_list_dropdown, itemsAsalObat)
-        binding.asalObatDropDown.setAdapter(adapterAsalObat)
+        binding.tanggalPanenET.setText(simpleDateFormat.format(myCalendar.time))
     }
 
     @Deprecated("Deprecated in Java")

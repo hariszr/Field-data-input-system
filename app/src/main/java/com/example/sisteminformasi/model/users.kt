@@ -18,7 +18,7 @@ data class Users(
     val kec: String,
     val desa: String,
 //    val status_adm: String,
-//    val gab_kode: String,
+    val gab_kode: String,
     val nama_poktan: String,
 //    val kode_poktan: String,
     val username: String,

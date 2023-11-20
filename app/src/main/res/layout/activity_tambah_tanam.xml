@@ -254,19 +254,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="250dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/input_dataLL">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_tambahTanam"
+            android:id="@+id/kirimBTN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:background="@drawable/btn_round3"
-            android:text="TAMBAH TANAM"
+            android:text="KIRIM"
             android:textSize="17sp"
             android:textColor="@color/white"
             android:textStyle="normal" />

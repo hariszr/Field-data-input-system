@@ -21,5 +21,21 @@ class Musim1Activity : AppCompatActivity() {
         binding!!.btnPemupukan1.setOnClickListener {
             startActivity(Intent(this@Musim1Activity, PemupukanActivity::class.java))
         }
+
+        binding!!.btnPemupukan2.setOnClickListener {
+            startActivity(Intent(this@Musim1Activity, PemupukanActivity::class.java))
+        }
+
+        binding!!.btnPengendalianOPT.setOnClickListener {
+            startActivity(Intent(this@Musim1Activity, OPTActivity::class.java))
+        }
+
+        binding!!.btnDinamikaBudidaya.setOnClickListener {
+            startActivity(Intent(this@Musim1Activity, DinamikaActivity::class.java))
+        }
+
+        binding!!.btnPanen.setOnClickListener {
+            startActivity(Intent(this@Musim1Activity, PanenActivity::class.java))
+        }
     }
 }

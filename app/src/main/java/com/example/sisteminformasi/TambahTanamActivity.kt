@@ -87,7 +87,7 @@ class TambahTanamActivity : AppCompatActivity() {
                 .start()
         }
 
-        binding!!.btnTambahTanam.setOnClickListener {
+        binding!!.kirimBTN.setOnClickListener {
             if (binding!!.luasTambahTanamET.text.toString().isNotEmpty()) {
                 if (binding!!.varietasDropDown.text.toString().isNotEmpty()) {
                     if (binding!!.jumlahBenihET.text.toString().isNotEmpty()) {
@@ -130,8 +130,8 @@ class TambahTanamActivity : AppCompatActivity() {
         val tanggalInput = binding!!.tanggalTanamET.text.toString()
 
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
-        val kodwil = sharedPreferences.getString("kodewilayah", (-1).toString())
-        val createdby = sharedPreferences.getString("createdby", (-1).toString())
+        val kodwil = sharedPreferences.getString("gabKode", (-1).toString())
+        val createdby = sharedPreferences.getString("id", (-1).toString())
 
         println("kodwil: $kodwil")
         println("createdby: $createdby")

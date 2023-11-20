@@ -84,8 +84,8 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("desa", user.desa)
             editor.putString("poktan", user.nama_poktan)
 
-//            editor.putString("kodewilayah", user.kodwil)
-//            editor.putString("createdby", user.id.toString())
+            editor.putString("gabKode", user.gab_kode)
+            editor.putString("id", user.id.toString())
             editor.apply()
 
             finish()

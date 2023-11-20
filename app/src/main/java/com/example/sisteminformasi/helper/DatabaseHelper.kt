@@ -20,12 +20,15 @@ SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "simultan.db"
         private const val TABLE_NAME = "database_users"
+
         private const val COLUMN_ID = "id"
         private const val COLUMN_PROVINSI = "prop"
         private const val COLUMN_KABUPATEN = "kab"
         private const val COLUMN_KECAMATAN = "kec"
         private const val COLUMN_DESA = "desa"
+        private const val COLUMN_GAB_KODE = "gab_kode"
         private const val COLUMN_NAMA_POKTAN = "nama_poktan"
+
         private const val COLUMN_USERNAME = "username"
         private const val COLUMN_PASSWORD = "kodwil"
 
@@ -71,6 +74,7 @@ SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION){
                 kec = cursor.getString(cursor.getColumnIndex(COLUMN_KECAMATAN)),
                 desa = cursor.getString(cursor.getColumnIndex(COLUMN_DESA)),
                 nama_poktan = cursor.getString(cursor.getColumnIndex(COLUMN_NAMA_POKTAN)),
+                gab_kode = cursor.getString(cursor.getColumnIndex(COLUMN_GAB_KODE)),
                 username = cursor.getString(cursor.getColumnIndex(COLUMN_USERNAME)),
                 kodwil = cursor.getString(cursor.getColumnIndex(COLUMN_PASSWORD)),
                 // tambahkan kolom lainnya jika diperlukan
