@@ -42,6 +42,9 @@ class PemupukanActivity : AppCompatActivity() {
 
         builder = AlertDialog.Builder(this)
 
+        val pemupukanKe = intent.getIntExtra("PEMUPUKAN_KE", 0)
+        Log.d("PemupukanKe", "Nilai pemupukanKe: $pemupukanKe")
+
         displayDropDownAsalPupuk()
         displayDate()
 
@@ -95,7 +98,9 @@ class PemupukanActivity : AppCompatActivity() {
     @SuppressLint("Recycle")
     private fun createApi() {
         val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+
         Log.d("MusimCode", "Nilai musimCode: $musimCode")
+
 
         val tanggalPemupukan = binding.tanggalPempupukanET.text.toString()
         val musimTanam = "1"

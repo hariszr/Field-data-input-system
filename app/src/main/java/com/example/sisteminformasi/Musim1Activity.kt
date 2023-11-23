@@ -3,6 +3,7 @@ package com.example.sisteminformasi
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.sisteminformasi.databinding.ActivityMusim1Binding
 
 class Musim1Activity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class Musim1Activity : AppCompatActivity() {
         }
 
         val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        Log.d("MusimCode", "Nilai MusimCode Di Halaman Musim Activity: $musimCode")
 
         binding!!.btnTambahTanam.setOnClickListener {
             val intent = Intent(this, TambahTanamActivity::class.java)
@@ -30,6 +32,7 @@ class Musim1Activity : AppCompatActivity() {
 
             val intent = Intent(this, PemupukanActivity::class.java)
             intent.putExtra("MUSIM_CODE", musimCode)
+            intent.putExtra("PEMUPUKAN_KE", 1)
             startActivity(intent)
         }
 
@@ -37,6 +40,7 @@ class Musim1Activity : AppCompatActivity() {
 
             val intent = Intent(this, PemupukanActivity::class.java)
             intent.putExtra("MUSIM_CODE", musimCode)
+            intent.putExtra("PEMUPUKAN_KE", 2)
             startActivity(intent)
         }
 

@@ -3,12 +3,14 @@ package com.example.sisteminformasi
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.sisteminformasi.databinding.ActivityHomeBinding
 import com.example.sisteminformasi.databinding.ActivityMusim1Binding
 import com.example.sisteminformasi.helper.DatabaseHelper
 
 class HomeActivity : AppCompatActivity() {
     private var binding : ActivityHomeBinding? = null
+    private var musimCode: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,19 +40,18 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding!!.btnDataKelompokTani.setOnClickListener {
-//            startActivity(Intent(this@HomeActivity, DataKelompokTaniActivity::class.java))
 
             val intent = Intent(this@HomeActivity, DataKelompokTaniActivity::class.java)
             startActivity(intent)
-            // Mendapatkan objek Users dari database SQLite
-//            val dbHelper = DatabaseHelper(this)
-//            val user = dbHelper.getUser("nama_pengguna", "N") // Ganti dengan kondisi atau metode yang sesuai
-//
-//            // Memulai aktivitas dan mengirimkan objek Users melalui Intent
-//            val intent = Intent(this, DataKelompokTaniActivity::class.java).apply {
-//                putExtra("USER_DATA", user)
-//            }
-//            startActivity(intent)
         }
+    }
+    override fun onResume() {
+        super.onResume()
+
+        // Reset nilai musimCode ke 0 saat HomeActivity kembali aktif
+        musimCode = 0
+
+        // Menampilkan nilai musimCode ke dalam log
+        Log.d("MusimCode", "Nilai musimCode setelah kembali ke HomeActivity: $musimCode")
     }
 }
