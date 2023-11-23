@@ -20,6 +20,8 @@ interface ApiClient {
     @Multipart
     @POST("login/create2.php")
     fun create(
+        @Part("tahun") tahun: RequestBody,
+        @Part("musim_tanam") musim: RequestBody,
         @Part("luas_tambah") luas_tambah_tanam: RequestBody,
         @Part("varietas_id") varietas: RequestBody,
         @Part("jumlah_benih") jumlah: RequestBody,
@@ -33,8 +35,10 @@ interface ApiClient {
     @Multipart
     @POST("login/create_pemupukan.php")
     fun create_pemupukan(
+        @Part("pemupukan_ke") pemupukan_ke: RequestBody,
+        @Part("tahun") tahun: RequestBody,
+        @Part("musim_tanam") musim: RequestBody,
         @Part("tanggal_pemupukan") tanggal: RequestBody,
-        @Part("musim_tanam") musim_tanam: RequestBody,
         @Part("kode_wilayah") kodwil: RequestBody,
         @Part("pupuk_urea_kg") urea: RequestBody,
         @Part("pupuk_sp36_kg") sp36: RequestBody,

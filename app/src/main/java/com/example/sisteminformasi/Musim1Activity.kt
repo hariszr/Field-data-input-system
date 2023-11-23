@@ -22,6 +22,8 @@ class Musim1Activity : AppCompatActivity() {
         val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
         Log.d("MusimCode", "Nilai MusimCode Di Halaman Musim Activity: $musimCode")
 
+        binding!!.numberOfMusimTV.text = musimCode.toString()
+
         binding!!.btnTambahTanam.setOnClickListener {
             val intent = Intent(this, TambahTanamActivity::class.java)
             intent.putExtra("MUSIM_CODE", musimCode)

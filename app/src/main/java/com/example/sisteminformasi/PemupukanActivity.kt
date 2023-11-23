@@ -33,6 +33,7 @@ class PemupukanActivity : AppCompatActivity() {
     private lateinit var builder : AlertDialog.Builder
 
     private var selectedImg : Uri? = null
+    private var pemupukanKe : Int? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,9 +42,6 @@ class PemupukanActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         builder = AlertDialog.Builder(this)
-
-        val pemupukanKe = intent.getIntExtra("PEMUPUKAN_KE", 0)
-        Log.d("PemupukanKe", "Nilai pemupukanKe: $pemupukanKe")
 
         displayDropDownAsalPupuk()
         displayDate()
@@ -57,6 +55,11 @@ class PemupukanActivity : AppCompatActivity() {
         binding.backProductListIV.setOnClickListener {
             finish()
         }
+
+        pemupukanKe = intent.getIntExtra("PEMUPUKAN_KE", 0)
+        Log.d("PemupukanKe", "Nilai pemupukanKe: $pemupukanKe")
+
+        binding.numberOfPemupukanTV.text = pemupukanKe.toString()
 
         val myCacheDir = File(externalCacheDir, "ImagePicker")
         myCacheDir.deleteRecursively()
@@ -97,13 +100,15 @@ class PemupukanActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
-        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        val myObject = MyClassForTahun()
+        myObject.setTahunSaatIni()
+        val tahunSaatIni = myObject.getTahun().toString()
+        Log.d("TahunNow", "Tahun Saat Ini: $tahunSaatIni")
 
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0).toString()
         Log.d("MusimCode", "Nilai musimCode: $musimCode")
 
-
         val tanggalPemupukan = binding.tanggalPempupukanET.text.toString()
-        val musimTanam = "1"
         val urea = binding.ureaET.text.toString()
         val sp36 = binding.sp36ET.text.toString()
         val npk = binding.npkET.text.toString()
@@ -131,8 +136,10 @@ class PemupukanActivity : AppCompatActivity() {
             val images = MultipartBody.Part.createFormData("images", file.name, requestFile)
 
             api.create_pemupukan(
+                RequestBody.create("text/plain".toMediaTypeOrNull(), pemupukanKe.toString()),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), tahunSaatIni),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), musimCode),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), tanggalPemupukan),
-                RequestBody.create("text/plain".toMediaTypeOrNull(), musimTanam),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), kodwil.toString()),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), urea),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), sp36),

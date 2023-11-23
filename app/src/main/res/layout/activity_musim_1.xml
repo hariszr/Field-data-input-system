@@ -36,11 +36,22 @@
                     android:src="@drawable/ic_back" />
 
                 <TextView
+                    android:id="@+id/musimTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Musim Tanam 1"
+                    android:text="Musim Tanam "
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold|normal" />
+                <TextView
+                    android:id="@+id/numberOfMusimTV"
+                    android:layout_toRightOf="@id/musimTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="-"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold|normal" />

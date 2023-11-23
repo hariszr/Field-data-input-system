@@ -126,7 +126,12 @@ class TambahTanamActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
-        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        val myObject = MyClassForTahun()
+        myObject.setTahunSaatIni()
+        val tahunSaatIni = myObject.getTahun().toString()
+        Log.d("TahunNow", "Tahun Saat Ini: $tahunSaatIni")
+
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0).toString()
         Log.d("MusimCode", "Nilai musimCode: $musimCode")
 
         val luasTambahTanam = binding!!.luasTambahTanamET.text.toString()
@@ -196,6 +201,8 @@ class TambahTanamActivity : AppCompatActivity() {
             val images = MultipartBody.Part.createFormData("images", file.name, requestFile)
 
             api.create(
+                RequestBody.create("text/plain".toMediaTypeOrNull(), tahunSaatIni),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), musimCode),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), luasTambahTanam),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), varietas),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), jumlahBenih),

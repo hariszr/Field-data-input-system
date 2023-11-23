@@ -36,11 +36,22 @@
                     android:src="@drawable/ic_back" />
 
                 <TextView
+                    android:id="@+id/pemupukanTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:text="Data Pemupukan"
+                    android:text="Data Pemupukan Ke-"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold|normal" />
+                <TextView
+                    android:id="@+id/numberOfPemupukanTV"
+                    android:layout_toRightOf="@id/pemupukanTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="-"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold|normal" />
