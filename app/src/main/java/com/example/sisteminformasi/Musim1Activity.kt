@@ -8,7 +8,7 @@ import com.example.sisteminformasi.databinding.ActivityMusim1Binding
 
 class Musim1Activity : AppCompatActivity() {
     private var binding : ActivityMusim1Binding? = null
-
+    private var pemupukanKe : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,5 +64,15 @@ class Musim1Activity : AppCompatActivity() {
             intent.putExtra("MUSIM_CODE", musimCode)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Reset nilai musimCode ke 0 saat HomeActivity kembali aktif
+        pemupukanKe = 0
+
+        // Menampilkan nilai musimCode ke dalam log
+        Log.d("PemupukanKe", "Nilai PemupukanKe setelah kembali ke MusimActivity: $pemupukanKe")
     }
 }
