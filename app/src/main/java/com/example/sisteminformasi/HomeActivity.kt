@@ -16,7 +16,25 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding!!.root)
 
         binding!!.btnMusimTanamI.setOnClickListener {
-            startActivity(Intent(this@HomeActivity, Musim1Activity::class.java))
+            val intent = Intent(this, Musim1Activity::class.java)
+            intent.putExtra("MUSIM_CODE", 1)
+            startActivity(intent)
+        }
+        binding!!.btnMusimTanamII.setOnClickListener {
+            val intent = Intent(this, Musim1Activity::class.java)
+            intent.putExtra("MUSIM_CODE", 2)
+            startActivity(intent)
+        }
+        binding!!.btnMusimTanamIII.setOnClickListener {
+            val intent = Intent(this, Musim1Activity::class.java)
+            intent.putExtra("MUSIM_CODE", 3)
+            startActivity(intent)
+        }
+
+        binding!!.btnMusimTanamIV.setOnClickListener {
+            val intent = Intent(this, Musim1Activity::class.java)
+            intent.putExtra("MUSIM_CODE", 4)
+            startActivity(intent)
         }
 
         binding!!.btnDataKelompokTani.setOnClickListener {

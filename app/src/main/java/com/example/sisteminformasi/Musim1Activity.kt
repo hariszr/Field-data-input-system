@@ -8,34 +8,57 @@ import com.example.sisteminformasi.databinding.ActivityMusim1Binding
 class Musim1Activity : AppCompatActivity() {
     private var binding : ActivityMusim1Binding? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMusim1Binding.inflate(layoutInflater)
         setContentView(binding!!.root)
 
+        binding!!.backProductListIV.setOnClickListener {
+            finish()
+        }
+
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
 
         binding!!.btnTambahTanam.setOnClickListener {
-            startActivity(Intent(this@Musim1Activity, TambahTanamActivity::class.java))
+            val intent = Intent(this, TambahTanamActivity::class.java)
+            intent.putExtra("MUSIM_CODE", musimCode)
+            startActivity(intent)
         }
 
         binding!!.btnPemupukan1.setOnClickListener {
-            startActivity(Intent(this@Musim1Activity, PemupukanActivity::class.java))
+
+            val intent = Intent(this, PemupukanActivity::class.java)
+            intent.putExtra("MUSIM_CODE", musimCode)
+            startActivity(intent)
         }
 
         binding!!.btnPemupukan2.setOnClickListener {
-            startActivity(Intent(this@Musim1Activity, PemupukanActivity::class.java))
+
+            val intent = Intent(this, PemupukanActivity::class.java)
+            intent.putExtra("MUSIM_CODE", musimCode)
+            startActivity(intent)
         }
 
         binding!!.btnPengendalianOPT.setOnClickListener {
-            startActivity(Intent(this@Musim1Activity, OPTActivity::class.java))
+
+            val intent = Intent(this, OPTActivity::class.java)
+            intent.putExtra("MUSIM_CODE", musimCode)
+            startActivity(intent)
         }
 
         binding!!.btnDinamikaBudidaya.setOnClickListener {
-            startActivity(Intent(this@Musim1Activity, DinamikaActivity::class.java))
+
+            val intent = Intent(this, DinamikaActivity::class.java)
+            intent.putExtra("MUSIM_CODE", musimCode)
+            startActivity(intent)
         }
 
         binding!!.btnPanen.setOnClickListener {
-            startActivity(Intent(this@Musim1Activity, PanenActivity::class.java))
+
+            val intent = Intent(this, PanenActivity::class.java)
+            intent.putExtra("MUSIM_CODE", musimCode)
+            startActivity(intent)
         }
     }
 }

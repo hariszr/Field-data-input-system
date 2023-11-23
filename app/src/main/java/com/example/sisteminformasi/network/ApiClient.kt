@@ -80,4 +80,22 @@ interface ApiClient {
         @Part("created_by") createdBy: RequestBody,
         @Part img: MultipartBody.Part
     ) : Call<SubmitModel>
+
+    @Multipart
+    @POST("login/create_kelompok_tani.php")
+    fun create_kelompok_tani(
+        @Part("kode_wilayah") kodwil: RequestBody,
+        @Part("kel_tani") kel_tani: RequestBody,
+        @Part("nama_gapoktan") nama_gapoktan: RequestBody,
+        @Part("provinsi") prov: RequestBody,
+        @Part("kabupaten_kota") kab_kota: RequestBody,
+        @Part("kecamatan") kec: RequestBody,
+        @Part("desa_kelurahan") desa_kelurahan: RequestBody,
+        @Part("luas_lahan") luas_lahan: RequestBody,
+        @Part("nama_ketua") nama_ketua: RequestBody,
+        @Part("no_ketua_poktan") no_ketua_poktan: RequestBody,
+        @Part("no_ketua_gapoktan") no_ketua_gapoktan: RequestBody,
+        @Part("no_penyuluh") no_penyuluh: RequestBody,
+        @Part("created_by") created_by: RequestBody
+    ) : Call<SubmitModel>
 }

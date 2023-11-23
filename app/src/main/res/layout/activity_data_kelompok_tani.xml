@@ -8,443 +8,490 @@
     android:background="@drawable/bg_background"
     tools:context=".DataKelompokTaniActivity">
 
-    <LinearLayout
-        android:id="@+id/input_dataLL"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerListTraceabilityCL"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="15dp">
+        android:layout_height="56dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?actionBarSize"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama Kelompok Tani"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
+            android:padding="8dp"
+            tools:ignore="MissingConstraints">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/poktanLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/poktanET"
-                    android:layout_width="190dp"
+                <ImageView
+                    android:id="@+id/back_ProductListIV"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="Input Data Kelompok Tani"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold|normal" />
+            </RelativeLayout>
         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerListTraceabilityCL">
 
         <LinearLayout
+            android:id="@+id/input_dataLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama GAPOKTAN"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/gapokLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/gapokET"
-                    android:layout_width="190dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Nama Kelompok Tani"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/poktanLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/poktanET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textCapWords"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Provinsi"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/provLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/provET"
-                    android:layout_width="190dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Nama GAPOKTAN"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/gapokLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/gapokET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textCapWords"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kabupaten/Kota"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/kabLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/kabET"
-                    android:layout_width="190dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Provinsi"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/provLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/provET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kecamatan"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/kecLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/kecET"
-                    android:layout_width="190dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Kabupaten/Kota"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/kabLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/kabET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Desa/Kelurahan"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/desaLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/desaET"
-                    android:layout_width="190dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Kecamatan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/kecLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/kecET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Luas Lahan Baku"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/luas_BahanBakuLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/luas_BahanBakuET"
-                    android:layout_width="190dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="numberDecimal"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Desa/Kelurahan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/desaLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/desaET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama Ketua POKTAN"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/nama_KetuaPOKTANLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nama_KetuaPOKTANET"
-                    android:layout_width="190dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Luas Lahan Baku"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/luas_BahanBakuLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/luas_BahanBakuET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No. HP Ketua POKTAN"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/hp_KetuaPOKTANLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hp_KetuaPOKTANET"
-                    android:layout_width="160dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="Nama Ketua POKTAN"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/nama_KetuaPOKTANLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/nama_KetuaPOKTANET"
+                        android:layout_width="190dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="textCapWords"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="NO. HP Ketua GAPOKTAN"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/hp_KetuaGAPOKTANLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hp_KetuaGAPOKTANET"
-                    android:layout_width="160dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="No. HP Ketua POKTAN"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/hp_KetuaPOKTANLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="15dp">
-            <TextView
-                android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/hp_KetuaPOKTANET"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="number|phone"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No. HP Petugas Penyuluh"
-                android:textSize="16sp"
-                android:textStyle="bold"/>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/hp_PetugasPenyuluhLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="0dp"
-                android:hint=""
-                app:boxStrokeColor="@color/dark_blue"
-                app:errorEnabled="true"
-                app:hintTextColor="@color/dark_blue">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/hp_PetugasPenyuluhET"
-                    android:layout_width="160dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawablePadding="12dp"
-                    android:inputType="textCapWords"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:text="NO. HP Ketua GAPOKTAN"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
 
-        </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/hp_KetuaGAPOKTANLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/hp_KetuaGAPOKTANET"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="number|phone"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No. HP Petugas Penyuluh"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/hp_PetugasPenyuluhLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="0dp"
+                    android:hint=""
+                    app:boxStrokeColor="@color/dark_blue"
+                    app:errorEnabled="true"
+                    app:hintTextColor="@color/dark_blue">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/hp_PetugasPenyuluhET"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="12dp"
+                        android:inputType="number|phone"
+                        android:maxLines="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_tambahTanam"
-                android:layout_width="250dp"
+                android:id="@+id/kirimBTN"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/btn_round3"
-                android:text="TAMBAH TANAM"
+                android:text="KIRIM"
                 android:textSize="17sp"
                 android:textColor="@color/white"
                 android:textStyle="normal" />
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

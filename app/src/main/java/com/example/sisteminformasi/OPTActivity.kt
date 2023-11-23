@@ -50,6 +50,10 @@ class OPTActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupListener() {
 
+        binding.backProductListIV.setOnClickListener {
+            finish()
+        }
+
         val myCacheDir = File(externalCacheDir, "ImagePicker")
         myCacheDir.deleteRecursively()
         binding.addPhotoIV.setOnClickListener {
@@ -87,6 +91,9 @@ class OPTActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        Log.d("MusimCode", "Nilai musimCode: $musimCode")
+
         val luasPenyemprotan = binding.luasPenyemprotanET.text.toString()
 //        val musimTanam = "1"
         val jenisHamaPenyakit = binding.jenisHamaPenyakitET.text.toString()

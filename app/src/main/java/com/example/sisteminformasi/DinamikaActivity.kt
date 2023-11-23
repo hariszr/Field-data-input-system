@@ -52,6 +52,10 @@ class DinamikaActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupListener() {
 
+        binding.backProductListIV.setOnClickListener {
+            finish()
+        }
+
         val myCacheDir = File(externalCacheDir, "ImagePicker")
         myCacheDir.deleteRecursively()
         binding.addPhotoIV.setOnClickListener {
@@ -87,10 +91,13 @@ class DinamikaActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        Log.d("MusimCode", "Nilai musimCode: $musimCode")
+
         val jenisKejadian = binding.jenisKejadianDropDown.text.toString()
 //        val musimTanam = "1"
         val luasCakupan = binding.luasCakupanET.text.toString()
-        val potensiPengurangan = binding.potensiPenguranganDropDown.text.toString().replace("%", "").replace("-", "")
+        val potensiPengurangan = binding.potensiPenguranganDropDown.text.toString()
         val tanggalKejadian = binding.tanggalKejadianET.text.toString()
 
         val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)

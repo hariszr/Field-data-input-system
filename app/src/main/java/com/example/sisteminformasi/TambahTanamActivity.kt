@@ -66,6 +66,9 @@ class TambahTanamActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupListener() {
 
+        binding!!.backProductListIV.setOnClickListener {
+            finish()
+        }
 //        val activityResultLauncher = registerForActivityResult<Intent, ActivityResult>(
 //            ActivityResultContracts.StartActivityForResult()){ result ->
 //            if (result.resultCode == RESULT_OK){
@@ -123,6 +126,9 @@ class TambahTanamActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        Log.d("MusimCode", "Nilai musimCode: $musimCode")
+
         val luasTambahTanam = binding!!.luasTambahTanamET.text.toString()
         val varietas = binding!!.varietasDropDown.text.toString()
         val jumlahBenih = binding!!.jumlahBenihET.text.toString()

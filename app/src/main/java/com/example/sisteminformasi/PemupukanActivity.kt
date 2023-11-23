@@ -51,6 +51,10 @@ class PemupukanActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupListener() {
 
+        binding.backProductListIV.setOnClickListener {
+            finish()
+        }
+
         val myCacheDir = File(externalCacheDir, "ImagePicker")
         myCacheDir.deleteRecursively()
         binding.addPhotoIV.setOnClickListener {
@@ -90,6 +94,9 @@ class PemupukanActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        Log.d("MusimCode", "Nilai musimCode: $musimCode")
+
         val tanggalPemupukan = binding.tanggalPempupukanET.text.toString()
         val musimTanam = "1"
         val urea = binding.ureaET.text.toString()

@@ -48,6 +48,10 @@ class PanenActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupListener() {
 
+        binding.backProductListIV.setOnClickListener {
+            finish()
+        }
+
         val myCacheDir = File(externalCacheDir, "ImagePicker")
         myCacheDir.deleteRecursively()
         binding.addPhotoIV.setOnClickListener {
@@ -81,6 +85,9 @@ class PanenActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        Log.d("MusimCode", "Nilai musimCode: $musimCode")
+
         val luasPanen = binding.luasPanenET.text.toString()
 //        val musimTanam = "1"
         val jumlahPanen = binding.jumlahPanenET.text.toString()
