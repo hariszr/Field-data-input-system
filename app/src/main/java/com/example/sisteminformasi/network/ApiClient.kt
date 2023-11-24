@@ -52,6 +52,8 @@ interface ApiClient {
     @Multipart
     @POST("login/create_OPT.php")
     fun create_OPT(
+        @Part("tahun") tahun: RequestBody,
+        @Part("musim_tanam") musim: RequestBody,
         @Part("luas_penyemprotan") luas_penyemprotan: RequestBody,
         @Part("kode_wilayah") kodwil: RequestBody,
         @Part("jenis_hama_penyakit") jenis_hama_penyakit: RequestBody,
@@ -65,6 +67,8 @@ interface ApiClient {
     @Multipart
     @POST("login/create_dinamika.php")
     fun create_dinamika(
+        @Part("tahun") tahun: RequestBody,
+        @Part("musim_tanam") musim: RequestBody,
         @Part("kode_wilayah") kodwil: RequestBody,
         @Part("jenis_kejadian") jenis_kejadian: RequestBody,
         @Part("luas_cakupan") luas: RequestBody,
@@ -77,6 +81,8 @@ interface ApiClient {
     @Multipart
     @POST("login/create_panen.php")
     fun create_panen(
+        @Part("tahun") tahun: RequestBody,
+        @Part("musim_tanam") musim: RequestBody,
         @Part("kode_wilayah") kodwil: RequestBody,
         @Part("luas_panen") luas_panen: RequestBody,
         @Part("jumlah_panen") jumlah: RequestBody,

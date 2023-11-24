@@ -91,7 +91,12 @@ class OPTActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
-        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        val myObject = MyClassForTahun()
+        myObject.setTahunSaatIni()
+        val tahunSaatIni = myObject.getTahun().toString()
+        Log.d("TahunNow", "Tahun Saat Ini: $tahunSaatIni")
+
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0).toString()
         Log.d("MusimCode", "Nilai musimCode: $musimCode")
 
         val luasPenyemprotan = binding.luasPenyemprotanET.text.toString()
@@ -121,6 +126,8 @@ class OPTActivity : AppCompatActivity() {
             val images = MultipartBody.Part.createFormData("images", file.name, requestFile)
 
             api.create_OPT(
+                RequestBody.create("text/plain".toMediaTypeOrNull(), tahunSaatIni),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), musimCode),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), luasPenyemprotan),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), kodwil.toString()),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), jenisHamaPenyakit),

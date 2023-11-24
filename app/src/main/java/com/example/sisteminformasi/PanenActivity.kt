@@ -85,7 +85,12 @@ class PanenActivity : AppCompatActivity() {
 
     @SuppressLint("Recycle")
     private fun createApi() {
-        val musimCode = intent.getIntExtra("MUSIM_CODE", 0)
+        val myObject = MyClassForTahun()
+        myObject.setTahunSaatIni()
+        val tahunSaatIni = myObject.getTahun().toString()
+        Log.d("TahunNow", "Tahun Saat Ini: $tahunSaatIni")
+
+        val musimCode = intent.getIntExtra("MUSIM_CODE", 0).toString()
         Log.d("MusimCode", "Nilai musimCode: $musimCode")
 
         val luasPanen = binding.luasPanenET.text.toString()
@@ -113,6 +118,8 @@ class PanenActivity : AppCompatActivity() {
             val images = MultipartBody.Part.createFormData("images", file.name, requestFile)
 
             api.create_panen(
+                RequestBody.create("text/plain".toMediaTypeOrNull(), tahunSaatIni),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), musimCode),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), kodwil.toString()),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), luasPanen),
                 RequestBody.create("text/plain".toMediaTypeOrNull(), jumlahPanen),

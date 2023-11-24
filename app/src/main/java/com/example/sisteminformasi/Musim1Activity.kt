@@ -71,7 +71,7 @@ class Musim1Activity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        // Reset nilai musimCode ke 0 saat HomeActivity kembali aktif
+        // Reset nilai pemupukanKe ke 0 saat HomeActivity kembali aktif
         pemupukanKe = 0
 
         // Menampilkan nilai musimCode ke dalam log

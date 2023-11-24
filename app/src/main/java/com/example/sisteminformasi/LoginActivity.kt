@@ -35,6 +35,15 @@ class LoginActivity : AppCompatActivity() {
 
         db = DatabaseHelper(this)
 
+        val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val getUsername = sharedPreferences.getString("id", "")
+        val getPassword = sharedPreferences.getString("kodwil", "")
+
+        if (getUsername != "" && getPassword != "") {
+            val i = Intent(this, HomeActivity::class.java)
+            startActivity(i)
+        }
+
         binding!!.btnLogin.setOnClickListener {
             user = binding!!.usernameET.text.toString()
             pass = binding!!.passwordET.text.toString()
@@ -69,10 +78,6 @@ class LoginActivity : AppCompatActivity() {
 
         // Cek apakah user ditemukan atau tidak
         if (user != null) {
-            // Login berhasil, lakukan aksi sesuai kebutuhan
-            // Misalnya, arahkan ke halaman utama atau tampilkan pesan sukses
-            binding!!.loading.visibility = View.GONE
-            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
 
             // Simpan userId di SharedPreferences
             val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
@@ -86,10 +91,16 @@ class LoginActivity : AppCompatActivity() {
 
             editor.putString("gabKode", user.gab_kode)
             editor.putString("id", user.id.toString())
+            editor.putString("kodwil", user.kodwil)
             editor.apply()
 
-            finish()
+            // Login berhasil, lakukan aksi sesuai kebutuhan
+            // Misalnya, arahkan ke halaman utama atau tampilkan pesan sukses
+            binding!!.loading.visibility = View.GONE
+            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+
             Toast.makeText(this, "Login sukses", Toast.LENGTH_SHORT).show()
+            finish()
         } else {
             // Login gagal, tampilkan pesan kesalahan atau lakukan aksi sesuai kebutuhan
             // Misalnya, tampilkan Toast
@@ -97,85 +108,34 @@ class LoginActivity : AppCompatActivity() {
             binding!!.loading.visibility = View.GONE
         }
 
-//        val database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database_users")
-//            .build()
-//
-//        val userDao = database.userDao()
-//
-//
-//        val username = binding!!.usernameET.text.toString()
-//        val kodwil = binding!!.passwordET.text.toString()
-//
-//        val user = userDao.getUserByUsernameAndPassword(username, kodwil)
-//
-//        if (user != null) {
-//            // Login berhasil, arahkan ke halaman homescreen
-//            // Misalnya, dengan menggunakan Intent
-//            val intent = Intent(this, HomeActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        } else {
-//            // Login gagal, tampilkan pesan kesalahan atau lakukan aksi sesuai kebutuhan
-//            // Misalnya, tampilkan Toast
-//            Toast.makeText(this, "Login gagal, username atau password salah", Toast.LENGTH_SHORT).show()
-//        }
-
-//        if (validateLogin(username, kodwil)) {
-//            // Login berhasil, pindah ke tampilan homescreen
-//            val intent = Intent(this, HomeActivity::class.java)
-//            startActivity(intent)
-//            binding!!.loading.visibility = View.GONE
-//            finish()
-//        } else {
-//            // Tambahkan log sebelum menampilkan pesan kesalahan
-//            Log.d("LoginActivity", "Login Gagal! validateLogin returned false")
-//
-//            // Login gagal, tampilkan pesan kesalahan
-//            // (Anda bisa menambahkan TextView atau Toast)
-//            binding!!.loading.visibility = View.GONE
-//            Toast.makeText(this@LoginActivity, "Login Gagal! Periksa kembali username dan password", Toast.LENGTH_LONG).show()
-//        }
     }
 
-//    private fun validateLogin(username: String, kodwil: String): Boolean {
-//        // Gunakan DatabaseHelper untuk memeriksa apakah username dan password sesuai
-////        return db.getUser(username, kodwil)
+    override fun onResume() {
+        super.onResume()
+    }
+
+//    private fun getData() {
+//        val api = RetrofitClient().getInstance()
+//        api.login(user, pass).enqueue(object : Callback<ResponseLogin>{
+//            override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
+//                if (response.isSuccessful) {
+//                    if (response.body()?.response == true) {
+//                        binding!!.loading.visibility = View.GONE
+//                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+//                        finish()
+//                    } else {
+//                        binding!!.loading.visibility = View.GONE
+//                        Toast.makeText(this@LoginActivity, "Login Gagal! Periksa kembali username dan password", Toast.LENGTH_LONG).show()
+//                    }
+//                } else {
+//                    Toast.makeText(this@LoginActivity, "Login Gagal! Terjadi kesalahan", Toast.LENGTH_LONG).show()
+//                }
+//            }
 //
+//            override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
+//                Log.e("Login Error", "${t.message}")
+//            }
 //
-////        var isValid = false
-////
-////        runBlocking {
-////            launch {
-////                // Gunakan DatabaseHelper untuk memeriksa apakah username dan password sesuai
-////                isValid = db.getUser(username, kodwil)
-////            }
-////        }
-////
-////        return isValid
+//        })
 //    }
-
-    private fun getData() {
-        val api = RetrofitClient().getInstance()
-        api.login(user, pass).enqueue(object : Callback<ResponseLogin>{
-            override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
-                if (response.isSuccessful) {
-                    if (response.body()?.response == true) {
-                        binding!!.loading.visibility = View.GONE
-                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
-                        finish()
-                    } else {
-                        binding!!.loading.visibility = View.GONE
-                        Toast.makeText(this@LoginActivity, "Login Gagal! Periksa kembali username dan password", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    Toast.makeText(this@LoginActivity, "Login Gagal! Terjadi kesalahan", Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
-                Log.e("Login Error", "${t.message}")
-            }
-
-        })
-    }
 }
