@@ -76,7 +76,8 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/icon_rice"
@@ -93,11 +94,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tanggal Pemupukan"
+                    android:layout_marginBottom="8dp"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
 
@@ -105,10 +107,10 @@
                     android:id="@+id/tanggalPempupukanLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="30dp"
                     android:layout_marginEnd="12dp"
                     android:hint=""
                     app:boxStrokeColor="@color/dark_blue"
@@ -117,7 +119,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tanggalPempupukanET"
-                        android:layout_width="170dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/ic_date"
                         android:clickable="false"
@@ -221,7 +223,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/npkLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:gravity="right"
@@ -271,7 +273,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/npkFormulaKCLET"
-                        android:layout_width="170dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="12dp"
                         android:inputType="numberDecimal|numberSigned" />
@@ -284,10 +286,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Asal Pupuk"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -296,10 +299,10 @@
                     android:id="@+id/asal_PupukLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="67dp"
                     android:layout_marginEnd="12dp"
                     android:hint=""
                     app:boxStrokeColor="@color/dark_blue"
@@ -308,7 +311,7 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/asal_PupukDropDown"
-                        android:layout_width="200dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="-30dp"
                         android:inputType="textCapWords"/>
@@ -356,7 +359,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginTop="10dp"
@@ -381,6 +384,17 @@
                     android:src="@drawable/icon_add_photo"
                     tools:ignore="MissingConstraints"
                     android:contentDescription="TODO" />
+                <TextView
+                    android:id="@+id/errorPictTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/add_PhotoIV"
+                    android:text="Dokumentasi Harus Diisi!"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -398,7 +412,7 @@
                 android:textStyle="normal" />
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/bottom_logo"

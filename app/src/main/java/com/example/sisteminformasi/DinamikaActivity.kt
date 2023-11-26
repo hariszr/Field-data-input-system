@@ -9,9 +9,13 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import com.example.sisteminformasi.databinding.ActivityDinamikaBinding
 import com.example.sisteminformasi.network.ApiRetrofit
@@ -34,11 +38,33 @@ class DinamikaActivity : AppCompatActivity() {
 
     private var selectedImg : Uri? = null
 
+    val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            println("Exit 0")
+            if (binding.jenisKejadianDropDown.text.toString().isEmpty() && binding.luasCakupanET.text.toString().isEmpty() && binding.potensiPenguranganDropDown.text.toString().isEmpty()
+                && binding.tanggalKejadianET.text.toString().isEmpty() && selectedImg == null) {
+                finish()
+            } else {
+                builder.setTitle("Batalkan Pengisian Data")
+                    .setMessage("Apakah anda yakin ingin membatalkan?")
+                    .setCancelable(true)
+                    .setNegativeButton("Tidak") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .setPositiveButton("Ya") { dialogInterface, it ->
+                        finish()
+                    }
+                    .show()
+            }
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDinamikaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
 
         builder = AlertDialog.Builder(this)
 
@@ -53,7 +79,21 @@ class DinamikaActivity : AppCompatActivity() {
     private fun setupListener() {
 
         binding.backProductListIV.setOnClickListener {
-            finish()
+            if (binding.jenisKejadianDropDown.text.toString().isEmpty() && binding.luasCakupanET.text.toString().isEmpty() && binding.potensiPenguranganDropDown.text.toString().isEmpty()
+                && binding.tanggalKejadianET.text.toString().isEmpty() && selectedImg == null) {
+                finish()
+            } else {
+                builder.setTitle("Batalkan Pengisian Data")
+                    .setMessage("Apakah anda yakin ingin membatalkan?")
+                    .setCancelable(true)
+                    .setNegativeButton("Tidak") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .setPositiveButton("Ya") { dialogInterface, it ->
+                        finish()
+                    }
+                    .show()
+            }
         }
 
         val myCacheDir = File(externalCacheDir, "ImagePicker")
@@ -68,29 +108,136 @@ class DinamikaActivity : AppCompatActivity() {
         }
 
         binding.kirimBTN.setOnClickListener {
-            if (binding.jenisKejadianDropDown.text.toString().isNotEmpty()) {
-                if (binding.luasCakupanET.text.toString().isNotEmpty()) {
-                    if (binding.potensiPenguranganDropDown.text.toString().isNotEmpty()) {
-                        if (binding.tanggalKejadianET.text.toString().isNotEmpty()) {
-                            builder.setTitle("Kirim Data")
-                                .setMessage("Apakah data yang dimasukkan sudah benar?")
-                                .setCancelable(true)
-                                .setNegativeButton("Batalkan") {dialogInterface, it ->
-                                    dialogInterface.cancel()
-                                }
-                                .setPositiveButton("Ya") {dialogInterface, it ->
-                                    createApi()
-                                }
-                                .show()
-                        }
-                    }
-                }
-            }
+            validation()
         }
+
+        binding.jenisKejadianDropDown.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validationJenisKejadian()
+            }
+        })
+
+        binding.potensiPenguranganDropDown.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validationPotensi()
+            }
+        })
+
+        binding.tanggalKejadianET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validationTanggalKejadian()
+            }
+        })
+    }
+
+    private fun validationJenisKejadian() {
+        if (binding.jenisKejadianDropDown.text.isEmpty()) {
+            binding.jenisKejadianLayout.error = "Kolom Harus Diisi"
+            binding.jenisKejadianDropDown.requestFocus()
+            return
+        } else {
+            binding.jenisKejadianLayout.error = null
+            binding.jenisKejadianDropDown.clearFocus()
+        }
+    }
+
+    private fun validationPotensi() {
+        if (binding.potensiPenguranganDropDown.text.isEmpty()) {
+            binding.potensiPenguranganLayout.error = "Kolom Harus Diisi"
+            binding.potensiPenguranganDropDown.requestFocus()
+            return
+        } else {
+            binding.potensiPenguranganLayout.error = null
+            binding.potensiPenguranganDropDown.clearFocus()
+        }
+    }
+
+    private fun validationTanggalKejadian() {
+        if (binding.tanggalKejadianET.text.toString().isEmpty()) {
+            binding.tanggalKejadianLayout.error = "Kolom Harus Diisi"
+            binding.tanggalKejadianET.requestFocus()
+            return
+        } else {
+            binding.tanggalKejadianLayout.error = null
+        }
+    }
+
+    private fun validation() {
+        if (binding.jenisKejadianDropDown.text.toString().isEmpty()) {
+            binding.jenisKejadianLayout.error = "Kolom Harus Diisi"
+            binding.jenisKejadianDropDown.requestFocus()
+            return
+        }
+        if (binding.luasCakupanET.text.toString().isEmpty()) {
+            binding.luasCakupanET.error = "Kolom Harus Diisi"
+            binding.luasCakupanET.requestFocus()
+            return
+        }
+        if (binding.potensiPenguranganDropDown.text.toString().isEmpty()) {
+            binding.potensiPenguranganLayout.error = "Kolom Harus Diisi"
+            binding.potensiPenguranganDropDown.requestFocus()
+            return
+        }
+        if (binding.tanggalKejadianET.text.toString().isEmpty()) {
+            binding.tanggalKejadianLayout.error = "Kolom Harus Diisi"
+            binding.tanggalKejadianET.requestFocus()
+            return
+        } else {
+            binding.tanggalKejadianLayout.error = null
+            binding.tanggalKejadianET.clearFocus()
+        }
+        if (selectedImg == null) {
+//            Toast.makeText(this, "Product image cannot be empty", Toast.LENGTH_SHORT).show()
+            binding.errorPictTV.visibility = View.VISIBLE
+            binding.errorPictTV.requestFocus()
+            return
+        } else {
+            binding.errorPictTV.visibility = View.GONE
+        }
+        builder.setTitle("Kirim Data")
+            .setMessage("Apakah data yang dimasukkan sudah benar?")
+            .setCancelable(true)
+            .setNegativeButton("Batalkan") {dialogInterface, it ->
+                dialogInterface.cancel()
+            }
+            .setPositiveButton("Ya") {dialogInterface, it ->
+                createApi()
+            }
+            .show()
     }
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setCancelable(false)
+            .setView(R.layout.layout_progress)
+        val dialog = builder.create()
+        dialog.show()
+
         val myObject = MyClassForTahun()
         myObject.setTahunSaatIni()
         val tahunSaatIni = myObject.getTahun().toString()
@@ -141,6 +288,7 @@ class DinamikaActivity : AppCompatActivity() {
                         val result = response.body()
                         Toast.makeText(applicationContext, result!!.message, Toast.LENGTH_SHORT).show()
                         finish()
+                        dialog.dismiss()
                     }
                 }
 
@@ -148,10 +296,12 @@ class DinamikaActivity : AppCompatActivity() {
                     // Tanggapan gagal atau error
                     Log.e("API Call", "Failed to make API call", t)
                     Toast.makeText(applicationContext, "Failed to make API call", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
                 }
             })
         } else {
             Toast.makeText(this, "Gagal mendapatkan path gambar", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
         }
     }
 

@@ -14,7 +14,7 @@ class RetrofitClient {
             .create()
 
         return Retrofit.Builder()
-            .baseUrl("http://192.168.1.21:80/")
+            .baseUrl("http://192.168.1.25:80/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }

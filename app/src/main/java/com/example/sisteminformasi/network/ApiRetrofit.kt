@@ -30,7 +30,7 @@ class ApiRetrofit {
             .create()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.21:80/")
+            .baseUrl("http://192.168.1.25:80/")
             .client(client)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))

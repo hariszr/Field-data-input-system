@@ -9,9 +9,14 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import com.example.sisteminformasi.databinding.ActivityPemupukanBinding
 import com.example.sisteminformasi.network.ApiRetrofit
@@ -35,11 +40,34 @@ class PemupukanActivity : AppCompatActivity() {
     private var selectedImg : Uri? = null
     private var pemupukanKe : Int? = null
 
+    val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            println("Exit 0")
+            if (binding.tanggalPempupukanET.text.toString().isEmpty() && binding.ureaET.text.toString().isEmpty() && binding.sp36ET.text.toString().isEmpty()
+                && binding.npkET.text.toString().isEmpty() && binding.npkFormulaKCLET.text.toString().isEmpty() && binding.asalPupukDropDown.text.toString().isEmpty()
+                && binding.namaKiosET.text.toString().isEmpty() && selectedImg == null) {
+                finish()
+            } else {
+                builder.setTitle("Batalkan Pengisian Data")
+                    .setMessage("Apakah anda yakin ingin membatalkan?")
+                    .setCancelable(true)
+                    .setNegativeButton("Tidak") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .setPositiveButton("Ya") { dialogInterface, it ->
+                        finish()
+                    }
+                    .show()
+            }
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPemupukanBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
 
         builder = AlertDialog.Builder(this)
 
@@ -53,7 +81,22 @@ class PemupukanActivity : AppCompatActivity() {
     private fun setupListener() {
 
         binding.backProductListIV.setOnClickListener {
-            finish()
+            if (binding.tanggalPempupukanET.text.toString().isEmpty() && binding.ureaET.text.toString().isEmpty() && binding.sp36ET.text.toString().isEmpty()
+                && binding.npkET.text.toString().isEmpty() && binding.npkFormulaKCLET.text.toString().isEmpty() && binding.asalPupukDropDown.text.toString().isEmpty()
+                && binding.namaKiosET.text.toString().isEmpty() && selectedImg == null) {
+                finish()
+            } else {
+                builder.setTitle("Batalkan Pengisian Data")
+                    .setMessage("Apakah anda yakin ingin membatalkan?")
+                    .setCancelable(true)
+                    .setNegativeButton("Tidak") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .setPositiveButton("Ya") { dialogInterface, it ->
+                        finish()
+                    }
+                    .show()
+            }
         }
 
         pemupukanKe = intent.getIntExtra("PEMUPUKAN_KE", 0)
@@ -73,33 +116,148 @@ class PemupukanActivity : AppCompatActivity() {
         }
 
         binding.kirimBTN.setOnClickListener {
-            if (binding.tanggalPempupukanET.text.toString().isNotEmpty()) {
-                if (binding.ureaET.text.toString().isNotEmpty()) {
-                    if (binding.sp36ET.text.toString().isNotEmpty()) {
-                        if (binding.npkET.text.toString().isNotEmpty()) {
-                            if (binding.npkFormulaKCLET.text.toString().isNotEmpty()) {
-                                if (binding.asalPupukDropDown.text.toString().isNotEmpty()) {
-                                    builder.setTitle("Kirim Data")
-                                        .setMessage("Apakah data yang dimasukkan sudah benar?")
-                                        .setCancelable(true)
-                                        .setNegativeButton("Batalkan") {dialogInterface, it ->
-                                            dialogInterface.cancel()
-                                        }
-                                        .setPositiveButton("Ya") {dialogInterface, it ->
-                                            createApi()
-                                        }
-                                        .show()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            validation()
         }
+
+        binding.tanggalPempupukanET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validationTanggalPempupukan()
+            }
+        })
+
+        binding.asalPupukDropDown.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validationAsalPupuk()
+            }
+        })
+    }
+
+    private fun validationTanggalPempupukan() {
+        if (binding.tanggalPempupukanET.text.toString().isEmpty()) {
+            binding.tanggalPempupukanLayout.error = "Kolom Harus Diisi"
+            binding.tanggalPempupukanET.requestFocus()
+            return
+        } else {
+            binding.tanggalPempupukanLayout.error = null
+        }
+    }
+
+    private fun validationAsalPupuk() {
+        if (binding.asalPupukDropDown.text.isEmpty()) {
+            binding.asalPupukLayout.error = "Kolom Harus Diisi"
+            binding.asalPupukDropDown.requestFocus()
+            return
+        } else {
+            binding.asalPupukLayout.error = null
+            binding.asalPupukDropDown.clearFocus()
+        }
+    }
+
+    private fun validation() {
+        if (binding.tanggalPempupukanET.text.toString().isEmpty()) {
+            binding.tanggalPempupukanLayout.error = "Kolom Harus Diisi"
+            binding.tanggalPempupukanET.requestFocus()
+            binding.nestedScrollView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    // Pindahkan layar ke posisi TextView yang menampilkan pesan kesalahan
+                    binding.nestedScrollView.scrollTo(0, binding.errorPictTV.top)
+
+                    // Hapus listener setelah selesai
+                    binding.nestedScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+            return
+        } else {
+            binding.tanggalPempupukanLayout.error = null
+            binding.tanggalPempupukanET.clearFocus()
+        }
+        if (binding.ureaET.text.toString().isEmpty()) {
+            binding.ureaET.error = "Kolom Harus Diisi"
+            binding.ureaET.requestFocus()
+            binding.nestedScrollView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    // Pindahkan layar ke posisi TextView yang menampilkan pesan kesalahan
+                    binding.nestedScrollView.scrollTo(0, binding.errorPictTV.top)
+
+                    // Hapus listener setelah selesai
+                    binding.nestedScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+            return
+        }
+        if (binding.sp36ET.text.toString().isEmpty()) {
+            binding.sp36ET.error = "Kolom Harus Diisi"
+            binding.sp36ET.requestFocus()
+            binding.nestedScrollView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    // Pindahkan layar ke posisi TextView yang menampilkan pesan kesalahan
+                    binding.nestedScrollView.scrollTo(0, binding.errorPictTV.top)
+
+                    // Hapus listener setelah selesai
+                    binding.nestedScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+            return
+        }
+        if (binding.npkET.text.toString().isEmpty()) {
+            binding.npkET.error = "Kolom Harus Diisi"
+            binding.npkET.requestFocus()
+            return
+        }
+        if (binding.npkFormulaKCLET.text.toString().isEmpty()) {
+            binding.npkFormulaKCLET.error = "Kolom Harus Diisi"
+            binding.npkFormulaKCLET.requestFocus()
+            return
+        }
+        if (binding.asalPupukDropDown.text.toString().isEmpty()) {
+            binding.asalPupukLayout.error = "Kolom Harus Diisi"
+            binding.asalPupukDropDown.requestFocus()
+            return
+        }
+        if (selectedImg == null) {
+//            Toast.makeText(this, "Product image cannot be empty", Toast.LENGTH_SHORT).show()
+            binding.errorPictTV.visibility = View.VISIBLE
+            binding.errorPictTV.requestFocus()
+            return
+        } else {
+            binding.errorPictTV.visibility = View.GONE
+        }
+        builder.setTitle("Kirim Data")
+            .setMessage("Apakah data yang dimasukkan sudah benar?")
+            .setCancelable(true)
+            .setNegativeButton("Batalkan") {dialogInterface, it ->
+                dialogInterface.cancel()
+            }
+            .setPositiveButton("Ya") {dialogInterface, it ->
+                createApi()
+            }
+            .show()
     }
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setCancelable(false)
+            .setView(R.layout.layout_progress)
+        val dialog = builder.create()
+        dialog.show()
+
         val myObject = MyClassForTahun()
         myObject.setTahunSaatIni()
         val tahunSaatIni = myObject.getTahun().toString()
@@ -155,6 +313,7 @@ class PemupukanActivity : AppCompatActivity() {
                         val result = response.body()
                         Toast.makeText(applicationContext, result!!.message, Toast.LENGTH_SHORT).show()
                         finish()
+                        dialog.dismiss()
                     }
                 }
 
@@ -162,10 +321,12 @@ class PemupukanActivity : AppCompatActivity() {
                     // Tanggapan gagal atau error
                     Log.e("API Call", "Failed to make API call", t)
                     Toast.makeText(applicationContext, "Failed to make API call", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
                 }
             })
         } else {
             Toast.makeText(this, "Gagal mendapatkan path gambar", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
         }
     }
 

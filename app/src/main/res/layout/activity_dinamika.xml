@@ -80,10 +80,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Jenis Kejadian"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -92,7 +93,7 @@
                     android:id="@+id/jenisKejadianLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:layout_marginStart="12dp"
@@ -104,7 +105,7 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/jenisKejadianDropDown"
-                        android:layout_width="200dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="-30dp"
                         android:inputType="textCapWords"/>
@@ -154,11 +155,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Potensi Pengurangan Hasil"
+                    android:layout_marginBottom="8dp"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
 
@@ -166,7 +168,7 @@
                     android:id="@+id/potensiPenguranganLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:layout_marginStart="12dp"
@@ -178,7 +180,7 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/potensiPenguranganDropDown"
-                        android:layout_width="140dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="-30dp"
                         android:inputType="textCapWords"/>
@@ -191,10 +193,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Tanggal Kejadian"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -203,10 +206,10 @@
                     android:id="@+id/tanggalKejadianLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
-                    android:layout_marginStart="12dp"
+                    android:layout_marginStart="56dp"
                     android:layout_marginEnd="12dp"
                     android:hint=""
                     app:boxStrokeColor="@color/dark_blue"
@@ -215,7 +218,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tanggalKejadianET"
-                        android:layout_width="170dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableEnd="@drawable/ic_date"
                         android:clickable="false"
@@ -233,7 +236,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_marginTop="10dp"
@@ -258,6 +261,17 @@
                     android:src="@drawable/icon_add_photo"
                     tools:ignore="MissingConstraints"
                     android:contentDescription="TODO" />
+                <TextView
+                    android:id="@+id/errorPictTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/add_PhotoIV"
+                    android:text="Dokumentasi Harus Diisi!"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 

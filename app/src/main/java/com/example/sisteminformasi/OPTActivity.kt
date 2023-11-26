@@ -9,9 +9,14 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import com.example.sisteminformasi.databinding.ActivityOptactivityBinding
 import com.example.sisteminformasi.network.ApiRetrofit
@@ -33,11 +38,33 @@ class OPTActivity : AppCompatActivity() {
     private lateinit var builder : AlertDialog.Builder
 
     private var selectedImg : Uri? = null
+
+    val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            println("Exit 0")
+            if (binding.luasPenyemprotanET.text.toString().isEmpty() && binding.jenisHamaPenyakitET.text.toString().isEmpty() && binding.namaObatET.text.toString().isEmpty()
+                && binding.asalObatDropDown.text.toString().isEmpty() && binding.tanggalPenyemprotanET.text.toString().isEmpty() && selectedImg == null) {
+                finish()
+            } else {
+                builder.setTitle("Batalkan Pengisian Data")
+                    .setMessage("Apakah anda yakin ingin membatalkan?")
+                    .setCancelable(true)
+                    .setNegativeButton("Tidak") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .setPositiveButton("Ya") { dialogInterface, it ->
+                        finish()
+                    }
+                    .show()
+            }
+        }
+    }
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOptactivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
 
         builder = AlertDialog.Builder(this)
 
@@ -51,7 +78,21 @@ class OPTActivity : AppCompatActivity() {
     private fun setupListener() {
 
         binding.backProductListIV.setOnClickListener {
-            finish()
+            if (binding.luasPenyemprotanET.text.toString().isEmpty() && binding.jenisHamaPenyakitET.text.toString().isEmpty() && binding.namaObatET.text.toString().isEmpty()
+                && binding.asalObatDropDown.text.toString().isEmpty() && binding.tanggalPenyemprotanET.text.toString().isEmpty() && selectedImg == null) {
+                finish()
+            } else {
+                builder.setTitle("Batalkan Pengisian Data")
+                    .setMessage("Apakah anda yakin ingin membatalkan?")
+                    .setCancelable(true)
+                    .setNegativeButton("Tidak") { dialogInterface, it ->
+                        dialogInterface.cancel()
+                    }
+                    .setPositiveButton("Ya") { dialogInterface, it ->
+                        finish()
+                    }
+                    .show()
+            }
         }
 
         val myCacheDir = File(externalCacheDir, "ImagePicker")
@@ -66,31 +107,123 @@ class OPTActivity : AppCompatActivity() {
         }
 
         binding.kirimBTN.setOnClickListener {
-            if (binding.jenisHamaPenyakitET.text.toString().isNotEmpty()) {
-                if (binding.jenisHamaPenyakitET.text.toString().isNotEmpty()) {
-                    if (binding.namaObatET.text.toString().isNotEmpty()) {
-                        if (binding.asalObatDropDown.text.toString().isNotEmpty()) {
-                            if (binding.tanggalPenyemprotanET.text.toString().isNotEmpty()) {
-                                builder.setTitle("Kirim Data")
-                                    .setMessage("Apakah data yang dimasukkan sudah benar?")
-                                    .setCancelable(true)
-                                    .setNegativeButton("Batalkan") {dialogInterface, it ->
-                                        dialogInterface.cancel()
-                                    }
-                                    .setPositiveButton("Ya") {dialogInterface, it ->
-                                        createApi()
-                                    }
-                                    .show()
-                            }
-                        }
-                    }
-                }
-            }
+            validation()
         }
+
+        binding.asalObatDropDown.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validationAsalObat()
+            }
+        })
+
+        binding.tanggalPenyemprotanET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Tidak diperlukan
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                validationTanggalPenyemprotan()
+            }
+        })
+    }
+
+    private fun validationAsalObat() {
+        if (binding.asalObatDropDown.text.isEmpty()) {
+            binding.asalObatLayout.error = "Kolom Harus Diisi"
+            binding.asalObatDropDown.requestFocus()
+            return
+        } else {
+            binding.asalObatLayout.error = null
+            binding.asalObatDropDown.clearFocus()
+        }
+    }
+    private fun validationTanggalPenyemprotan() {
+        if (binding.tanggalPenyemprotanET.text.toString().isEmpty()) {
+            binding.tanggalPenyemprotanLayout.error = "Kolom Harus Diisi"
+            binding.tanggalPenyemprotanET.requestFocus()
+            return
+        } else {
+            binding.tanggalPenyemprotanLayout.error = null
+        }
+    }
+    private fun validation() {
+        if (binding.luasPenyemprotanET.text.toString().isEmpty()) {
+            binding.luasPenyemprotanET.error = "Kolom Harus Diisi"
+            binding.luasPenyemprotanET.requestFocus()
+            binding.nestedScrollView.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    // Pindahkan layar ke posisi TextView yang menampilkan pesan kesalahan
+                    binding.nestedScrollView.scrollTo(0, binding.errorPictTV.top)
+
+                    // Hapus listener setelah selesai
+                    binding.nestedScrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                }
+            })
+            return
+        }
+        if (binding.jenisHamaPenyakitET.text.toString().isEmpty()) {
+            binding.jenisHamaPenyakitET.error = "Kolom Harus Diisi"
+            binding.jenisHamaPenyakitET.requestFocus()
+            return
+        }
+        if (binding.namaObatET.text.toString().isEmpty()) {
+            binding.namaObatET.error = "Kolom Harus Diisi"
+            binding.jenisHamaPenyakitET.requestFocus()
+            return
+        }
+        if (binding.asalObatDropDown.text.toString().isEmpty()) {
+            binding.asalObatLayout.error = "Kolom Harus Diisi"
+            binding.asalObatDropDown.requestFocus()
+            return
+        }
+        if (binding.tanggalPenyemprotanET.text.toString().isEmpty()) {
+            binding.tanggalPenyemprotanLayout.error = "Kolom Harus Diisi"
+            binding.tanggalPenyemprotanET.requestFocus()
+            return
+        } else {
+            binding.tanggalPenyemprotanLayout.error = null
+            binding.tanggalPenyemprotanET.clearFocus()
+        }
+        if (selectedImg == null) {
+//            Toast.makeText(this, "Product image cannot be empty", Toast.LENGTH_SHORT).show()
+            binding.errorPictTV.visibility = View.VISIBLE
+            binding.errorPictTV.requestFocus()
+            return
+        } else {
+            binding.errorPictTV.visibility = View.GONE
+        }
+        builder.setTitle("Kirim Data")
+            .setMessage("Apakah data yang dimasukkan sudah benar?")
+            .setCancelable(true)
+            .setNegativeButton("Batalkan") {dialogInterface, it ->
+                                    dialogInterface.cancel()
+            }
+            .setPositiveButton("Ya") {dialogInterface, it ->
+                createApi()
+            }
+            .show()
     }
 
     @SuppressLint("Recycle")
     private fun createApi() {
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
+        builder.setCancelable(false)
+            .setView(R.layout.layout_progress)
+        val dialog = builder.create()
+        dialog.show()
+
         val myObject = MyClassForTahun()
         myObject.setTahunSaatIni()
         val tahunSaatIni = myObject.getTahun().toString()
@@ -143,6 +276,7 @@ class OPTActivity : AppCompatActivity() {
                         val result = response.body()
                         Toast.makeText(applicationContext, result!!.message, Toast.LENGTH_SHORT).show()
                         finish()
+                        dialog.dismiss()
                     }
                 }
 
@@ -150,10 +284,12 @@ class OPTActivity : AppCompatActivity() {
                     // Tanggapan gagal atau error
                     Log.e("API Call", "Failed to make API call", t)
                     Toast.makeText(applicationContext, "Failed to make API call", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
                 }
             })
         } else {
             Toast.makeText(this, "Gagal mendapatkan path gambar", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
         }
     }
 

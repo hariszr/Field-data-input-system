@@ -65,7 +65,8 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="580dp"
         android:layout_below="@+id/icon_rice">
@@ -191,11 +192,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="15dp">
+                android:gravity="start"
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Asal Obat"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -203,11 +205,10 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/asalObatLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:layout_marginStart="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:layout_marginStart="60dp"
                     android:layout_marginEnd="12dp"
                     android:hint=""
                     app:boxStrokeColor="@color/dark_blue"
@@ -216,7 +217,7 @@
 
                     <AutoCompleteTextView
                         android:id="@+id/asalObatDropDown"
-                        android:layout_width="200dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="-30dp"
                         android:inputType="textCapWords"/>
@@ -229,10 +230,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="15dp">
+                android:layout_marginBottom="0dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:text="Tanggal Penyemprotan"
                     android:textSize="16sp"
                     android:textStyle="bold"/>
@@ -241,7 +243,7 @@
                     android:id="@+id/tanggalPenyemprotanLayout"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="right"
                     android:layout_marginStart="12dp"
@@ -269,10 +271,10 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginBottom="20dp"
                 android:paddingEnd="10dp"
                 tools:ignore="RtlSymmetry">
@@ -294,6 +296,17 @@
                     android:src="@drawable/icon_add_photo"
                     tools:ignore="MissingConstraints"
                     android:contentDescription="TODO" />
+                <TextView
+                    android:id="@+id/errorPictTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/add_PhotoIV"
+                    android:text="Dokumentasi Harus Diisi!"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
@@ -311,7 +324,7 @@
                 android:textStyle="normal" />
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
