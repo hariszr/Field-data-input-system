@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface ApiClient {
 
     @FormUrlEncoded
-    @POST("login/login_service.php")
+    @POST("php/login_service.php")
     fun login(
         @Field("post_username") username : String,
         @Field("post_password") password : String
@@ -18,7 +18,7 @@ interface ApiClient {
 
 
     @Multipart
-    @POST("login/create2.php")
+    @POST("php/create2.php")
     fun create(
         @Part("tahun") tahun: RequestBody,
         @Part("musim_tanam") musim: RequestBody,
@@ -33,7 +33,7 @@ interface ApiClient {
     ) : Call<SubmitModel>
 
     @Multipart
-    @POST("login/create_pemupukan.php")
+    @POST("php/create_pemupukan.php")
     fun create_pemupukan(
         @Part("pemupukan_ke") pemupukan_ke: RequestBody,
         @Part("tahun") tahun: RequestBody,
@@ -50,7 +50,7 @@ interface ApiClient {
     ) : Call<SubmitModel>
 
     @Multipart
-    @POST("login/create_OPT.php")
+    @POST("php/create_OPT.php")
     fun create_OPT(
         @Part("tahun") tahun: RequestBody,
         @Part("musim_tanam") musim: RequestBody,
@@ -65,7 +65,7 @@ interface ApiClient {
     ) : Call<SubmitModel>
 
     @Multipart
-    @POST("login/create_dinamika.php")
+    @POST("php/create_dinamika.php")
     fun create_dinamika(
         @Part("tahun") tahun: RequestBody,
         @Part("musim_tanam") musim: RequestBody,
@@ -79,7 +79,7 @@ interface ApiClient {
     ) : Call<SubmitModel>
 
     @Multipart
-    @POST("login/create_panen.php")
+    @POST("php/create_panen.php")
     fun create_panen(
         @Part("tahun") tahun: RequestBody,
         @Part("musim_tanam") musim: RequestBody,
@@ -92,7 +92,7 @@ interface ApiClient {
     ) : Call<SubmitModel>
 
     @Multipart
-    @POST("login/create_kelompok_tani.php")
+    @POST("php/create_kelompok_tani.php")
     fun create_kelompok_tani(
         @Part("kode_wilayah") kodwil: RequestBody,
         @Part("kel_tani") kel_tani: RequestBody,

@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Sistem Informasi</string>
+    <string name="app_name_default">Sistem Informasi</string>
+    <string name="app_name_project">Simultan</string>
 </resources>
